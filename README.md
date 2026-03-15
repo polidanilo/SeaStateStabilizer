@@ -35,7 +35,7 @@ Scans the I2C bus and prints detected addresses; used to confirm PCA9685 (`0x40`
 **Hardware integration notes**  
 * Isolated servo and logic rails: SG90 servos draw 0.6–0.7 A each (~1.5 A peak combined), which would brown out the ESP32 if shared. The PCA9685 green terminal block carries motor power independently from the 3.3 V logic supply.
 * My PCA9685 required an explicit I2C initialization order in `Wire.begin(21, 22)` before `pwm.begin()` and explicit oscillator calibration in `setOscillatorFrequency(27000000)` — undocumented gotchas that cause silent servo failures on most Chinese clones.
-* MPU6050 breakout arrived to me with unsoldered header pins; after hand-soldering them I encountered intermittent I2C failures from cold joints on GND and SCL pins were diagnosed via direct pad bypass and resolved by re-soldering.
+* MPU6050 breakout arrived to me with unsoldered header pins; after my first try hand-soldering them, I encountered intermittent I2C failures caused by cold joints on the GND and SCL pins, diagnosed via direct pad bypass and resolved by re-soldering them. 
 
 ## Limitations
 The control loop and signal chain behave as intended; I closed the project as a proof-of-concept due to physical constraints inherent to the hardware. Commercial drone-grade gimbals use direct-drive brushless motors and rigid carbon frames — this prototype uses plastic-gear servos and cardboard, which introduce backlash, flex and parasitic torque that a software PID alone cannot fully compensate.

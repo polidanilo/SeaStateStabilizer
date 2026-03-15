@@ -12,32 +12,32 @@ Its primary goal is to keep a top-mounted sensor payload (MPU6050 IMU) perfectly
 PLACEHOLDER
 
 ## Features
-The repository is organized around focused single-purpose **.ino** sketches that served me in this project, each targeting one layer of the system:
+The repository is organized around focused single-purpose **`.ino`** sketches that served me in this project, each targeting one layer of the system:
 
-**`firmware/PID.h` and `firmware/PID.cpp`**  
+**`firmware/PID.h` and `firmware/PID.cpp`**
 Custom PID controller written in C++ with discrete time step `dt`  computed from `millis()`, integral windup cap, derivative kick handling, and output saturation via `constrain()`.
 
-**`firmware/PID.ino`**  
+**`firmware/PID.ino`**
 Main control loop: reads roll/pitch from MPU6050, feeds both axes through independent PID instances, and writes corrected PWM values to the PCA9685.
 
-**`firmware/TestMPU.ino`**  
+**`firmware/TestMPU.ino`**
 IMU integration: wakes MPU6050 from sleep (register `0x6B`), reads six raw accelerometer bytes from `0x3B`, reconstructs 16-bit values with shift-and-OR, computes roll and pitch via `atan2`, and applies a software low-pass filter (80 % previous sample, 20 % new) to suppress noise and structural vibration.
 
-**`firmware/SweepTest.ino`**  
+**`firmware/SweepTest.ino`**
 Mechanical validation: sweeps both servos through min / center / max PWM to verify the full kinematic chain before closing the control loop. Identified the PCA9685 clone oscillator mismatch (27 MHz instead of 25 MHz) that caused silent servo failures; fix: `pwm.setOscillatorFrequency(27000000)`.
 
-**`firmware/MidPointServo.ino`**  
+**`firmware/MidPointServo.ino`**
 Centers both servos at 90° (PWM 375) before locking horns and platform to the chassis — essential for symmetric range of motion.
 
-**`firmware/I2Cscanner.ino`**  
+**`firmware/I2Cscanner.ino`**
 Scans the I2C bus and prints detected addresses; used to confirm PCA9685 (`0x40`) and MPU6050 (`0x68`) are visible before any integration work.
 
-**Hardware integration notes**  
+### Hardware integration notes 
 * Isolated servo and logic rails: SG90 servos draw 0.6–0.7 A each (~1.5 A peak combined), which would brown out the ESP32 if shared. The PCA9685 green terminal block carries motor power independently from the 3.3 V logic supply.
 * My PCA9685 required an explicit I2C initialization order in `Wire.begin(21, 22)` before `pwm.begin()` and explicit oscillator calibration in `setOscillatorFrequency(27000000)` — undocumented gotchas that cause silent servo failures on most Chinese clones.
 * MPU6050 breakout arrived to me with unsoldered header pins; after my first try hand-soldering them, I encountered intermittent I2C failures caused by cold joints on the GND and SCL pins, diagnosed via direct pad bypass and resolved by re-soldering them.
 
-**Bill of materials**
+### Bill of materials
 | Component | Part |
 |-----------|------|
 | Microcontroller | ESP32 (38-pin) |
@@ -55,7 +55,7 @@ The control loop and signal chain behave as intended; I closed the project as a 
 * **Structural flex:** The cardboard chassis damps fast corrections and forced very conservative PID tuning (low Kp, light damping).
 * **Top-heavy layout:** The base servo fights a large moment arm (arm + upper servo + platform + IMU); inertia and backlash made the base axis prone to undesired oscillation.
 
-## Future work
+### Future work
 The current design relies on a reactive PID, which was enough for my first project, but literature on USVs highlights that purely reactive control has inherent latency in highly dynamic sea states. Future work could explore:
 * **Complementary or Kalman filter** on the IMU to fuse accelerometer and gyroscope data for more stable angle estimates.
 * **Model Predictive Control (MPC)** or other intelligent solutions, to anticipate tilt rather than only react to it — relevant for USV applications where sea-state prediction is feasible.

@@ -13,16 +13,22 @@ PLACEHOLDER
 
 ## Features
 The repository is organized around focused single-purpose **.ino** sketches that served me in this project, each targeting one layer of the system:
+
 **`firmware/PID.h` and `firmware/PID.cpp`**  
 Custom PID controller written in C++ with discrete time step `dt`  computed from `millis()`, integral windup cap, derivative kick handling, and output saturation via `constrain()`.
+
 **`firmware/PID.ino`**  
 Main control loop: reads roll/pitch from MPU6050, feeds both axes through independent PID instances, and writes corrected PWM values to the PCA9685.
+
 **`firmware/TestMPU.ino`**  
 IMU integration: wakes MPU6050 from sleep (register `0x6B`), reads six raw accelerometer bytes from `0x3B`, reconstructs 16-bit values with shift-and-OR, computes roll and pitch via `atan2`, and applies a software low-pass filter (80 % previous sample, 20 % new) to suppress noise and structural vibration.
+
 **`firmware/SweepTest.ino`**  
 Mechanical validation: sweeps both servos through min / center / max PWM to verify the full kinematic chain before closing the control loop. Identified the PCA9685 clone oscillator mismatch (27 MHz instead of 25 MHz) that caused silent servo failures; fix: `pwm.setOscillatorFrequency(27000000)`.
+
 **`firmware/MidPointServo.ino`**  
 Centers both servos at 90° (PWM 375) before locking horns and platform to the chassis — essential for symmetric range of motion.
+
 **`firmware/I2Cscanner.ino`**  
 Scans the I2C bus and prints detected addresses; used to confirm PCA9685 (`0x40`) and MPU6050 (`0x68`) are visible before any integration work.
 

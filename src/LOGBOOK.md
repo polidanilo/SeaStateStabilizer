@@ -2,16 +2,15 @@
 This is a step-by-step account of how the project started, how it was built and where it stopped. Some initial choices (e.g. USB adapter for motor power) are described first; later sections reflect the final wiring and firmware state.
 
 ## First steps...
-With my Software Engineering and Database Administration courses out of the way and the end of the Winter 2026 exam season, I wanted to try my hand at electronics. I jumped straight into wiring the ESP32 to the PCA9685 PWM driver; a 38-pin ESP32 turned out to be a large fella, taking up almost the entire width of a standard breadboard and leaving no room for jumper wires on its sides, so the breadboard was demoted to just an oversized power strip at the center of the system. Not very elegant.
+With my Software Engineering and Database Administration courses out of the way and the end of the Winter 2026 exam season, I wanted to try my hand at electronics. I jumped straight into wiring the ESP32 to the PCA9685 PWM driver; a 38-pin ESP32 turned out to be a large fella, taking up almost the entire width of a standard breadboard and leaving no room for jumper wires on its sides, so the breadboard was demoted to just an oversized power strip at the center of the system. Not very elegant already!
 
-**Initial wiring (Note: motor power via USB adapter was later superseded, as seen in section "Power distribution"):**
-Here is the initial wiring scheme:
+**Initial wiring scheme:**
 * ESP32 `3V3` → PCA9685 `VCC` (logic)
 * ESP32 `GND` → PCA9685 `GND`
 * ESP32 `GPIO 21` → PCA9685 `SDA` (I2C data)
 * ESP32 `GPIO 22` → PCA9685 `SCL` (I2C clock)
 * PCA9685 channels 0 and 1 → servos (PWM, V+, GND)
-* Motor power was first attempted via a USB adapter with screw terminals → PCA9685 green terminal block (external power).
+* Motor power was first attempted via a USB adapter with screw terminals → PCA9685 green terminal block (note: later superseded as seen in section "Power distribution")
 
 ## ...First Obstacles
 As I had my first attempt at stripping wires to connect screw terminals, power delivery bit me back immediately and the servos refused to behave. Or move. At all, for like a week. I had originally bought a QUI idk USB-to-terminals adapter to use with an existing USB extension cable I had, but the latter turned out to be faulty and nearly damaged components. That meant a bunch of tests to see who the culprit was, what had survived, and effectively a full restart. For a while losing my extension cable also meant I had to kneel by the wall for my power supply, until I decided for a solution.
@@ -22,17 +21,17 @@ Meanwhile, the MPU6050 arrived with its header pins unsoldered, so I had my firs
 After ruling out other makeshift options and powerbanks, I switched to a multi-voltage AC/DC wall supply with interchangeable plugs, including one with screw terminals to reach my PCA9685. One SG90 servo under full load draws about 0.6–0.7A, so my two servos together stay around 1.2–1.5A and a 5V, 3A unit was a good fit.
 
 **Final power and logic wiring:**
-* Supply positive wire → PCA9685 green block V+
-* Supply negative → double wire → PCA9685 green block GND
+* Supply positive → double wire → PCA9685 green block `V+`
+* Supply negative → double wire → PCA9685 green block `GND`
 * ESP32 `3V3` → breadboard red rail (logic)
 * ESP32 `GND` → breadboard blue/black rail
 * PCA9685 pin `VCC` → breadboard red (logic only — not the green block)
 * PCA9685 pin `GND` → breadboard blue/black
-* PCA9685 **OE (Output Enable)** → GND (so the outputs are forced enabled; some boards disable them if external power comes up late, eliminating another potential cause of my initial servo issues)
-* MPU6050 VCC/GND → same breadboard rails
-* ESP32 GPIO 21 → PCA9685 SDA and MPU6050 SDA (bus)
-* ESP32 GPIO 22 → PCA9685 SCL and MPU6050 SCL (bus)
-* Servo 1 (pitch) → PCA9685 channel 0 (brown → GND, red → V+, orange → PWM)
+* PCA9685 `OE` (Output Enable) → `GND` (so the outputs are forced enabled; some boards disable them if external power comes up late, eliminating another potential cause of my initial servo issues)
+* MPU6050 `VCC`/`GND` → same breadboard rails
+* ESP32 `GPIO 21` → PCA9685 `SDA` and MPU6050 `SDA` (bus)
+* ESP32 `GPIO 22` → PCA9685 `SCL` and MPU6050 `SCL` (bus)
+* Servo 1 (pitch) → PCA9685 channel 0 (brown → `GND`, red → `V+`, orange → `PWM`)
 * Servo 2 (roll) → PCA9685 channel 1
 
 **Other time-consuming power distribution lessons learned:**
@@ -66,26 +65,26 @@ Once assembled, I ran a sweep sketch to move both servos back and forth between 
 3. **Oscillator frequency for clones:** Many clone boards use a cheaper 27 MHz crystal instead of the standard 25 MHz. Calling `pwm.setOscillatorFrequency(27000000)` so that the PWM timing matches the hardware; before I added this line, the SG90 servos received garbled signals and often refused to move.
 
 ## MPU6050 integration
-With the motors moving it was time to tackle the MPU6050, which shares the same I2C bus with the PCA. Raw acceleration data was pulled from register 0x3B (reading six consecutive bytes for X, Y, and Z axes) and combined using bitwise shift and OR operations (Wire.read()<<8 | Wire.read()) to reconstruct the 16-bit values. Finally the atan2 trigonometric function on the gravity vector converted those raw numbers into human-readable roll and pitch degrees.
+With the motors moving it was time to tackle the MPU6050, which shares the same I2C bus with the PCA. Raw acceleration data was pulled from register `0x3B` (reading six consecutive bytes for X, Y, and Z axes) and combined using bitwise shift and OR operations (`Wire.read()<<8 | Wire.read()`) to reconstruct the 16-bit values. Finally the `atan2` trigonometric function on the gravity vector converted those raw numbers into human-readable roll and pitch degrees.
 Obviously my cardboard base was far from perfectly level, so the resting angles were hovering around 5° off-center. Instead of rebuilding the chassis, I just implemented a software tare by subtracting the resting offset from every reading.
 
-My first usable run was spoiled by intermittent I2C failures: the Serial Monitor showed garbage values (like a constant -129) and then froze. A quick bypass test by pressing the Dupont tips directly onto the solder pads confirmed the board wasn't dead, just poorly connected on the GND and SCL pins because of my terrible soldering. Redoing the solder joints properly resolved the freezing issue and the onboard green LED finally told me the IMU was happy and powered!
+My first usable run was spoiled by intermittent I2C failures: the Serial Monitor showed garbage values (like a constant `-129`) and then froze. A quick bypass test by pressing the Dupont tips directly onto the solder pads confirmed the board wasn't dead, just poorly connected on the `GND` and `SCL` pins because of my terrible soldering. Redoing the solder joints properly resolved the freezing issue and the onboard green LED finally told me the IMU was happy and powered!
 
 ## PID and filter
-With both the IMU and the servos finally behaving, the last step was closing the loop: Read Angle → Calculate PID → Output PWM. I wrote a custom PID class from scratch (see PID.h / PID.cpp) that calculates the required correction based on the setpoint (0°), the measured angle, and the discrete delta-time (dt) calculated using millis(). I then added this output correction to my servo center (375) and clamped it with a constrain() function to protect the cardboard mechanics from ripping themselves apart.
+With both the IMU and the servos finally behaving, the last step was closing the loop: `Read Angle → Calculate PID → Output PWM`. I wrote a custom PID class from scratch (see `PID.h` / `PID.cpp`) that calculates the required correction based on the setpoint (0°), the measured angle, and the discrete delta-time (`dt`) calculated using `millis()`. I then added this output correction to my servo center (375) and clamped it with a `constrain()` function to protect the cardboard mechanics from ripping themselves apart.
 
 Initially, I fired up both axes at once. The upper (roll) servo responded beautifully. The base (pitch) servo however kept going crazy, driving the whole tower into violent oscillations. Here is what I tried to tame it:
 * **Fighting the deadband:** For tiny errors (like 1 degree), the PID correctly calculated a single step correction (e.g., PWM 376 instead of 375), but the cheap plastic gears couldn't physically resolve a 1-step difference. The mechanical deadband swallowed these small corrections whole, making the software's precision useless.
 * **Adding a low-pass filter:** Implementing a simple software filter (taking 80% of the previous value and 20% of the new reading) which successfully smoothed out the angle readings and reduced jitter caused by inherent sensor noise and the vibrations of the motors themselves.
-* **The derivative kick:** To damp the swinging base, I introduced the Derivative term (Kd). But with my main loop running at ~15 ms, dividing a normal Kd value (like 0.8) by a tiny dt produced mathematically massive spikes. It essentially kicked the servo to its maximum limit instantly, locking it in place. Dropping Kd to a micro-value (0.05) and softening Kp (0.5) yielded a gentler response, but it couldn't mask the underlying physics: the base servo was fighting a huge moment arm and top-heavy inertia, and the gear backlash made overshooting inevitable.
+* **The derivative kick:** To damp the swinging base, I introduced the Derivative term (`Kd`). But with my main loop running at ~15 ms, dividing a normal `Kd` value (like 0.8) by a tiny `dt` produced mathematically massive spikes. It essentially kicked the servo to its maximum limit instantly, locking it in place. Dropping `Kd` to a micro-value (0.05) and softening `Kp` (0.5) yielded a gentler response, but it couldn't mask the underlying physics: the base servo was fighting a huge moment arm and top-heavy inertia, and the gear backlash made overshooting inevitable.
 
 ## Physical limits and closure
-So, the software pipeline was a success: IMU → Filter → PID → PWM. The upper axis stabilized the roll acceptably well. However, the physical limits of the hardware (severe backlash, structural flex, elastic cable torque, and a top-heavy layout) meant that the full stable two-axis stabilization I hoped for was unattainable from my prototype. No amount of software tuning can magically fix mechanical compliance :(
+So, the software pipeline was a success: `IMU → Filter → PID → PWM`. The upper axis stabilized the roll acceptably well. However, the physical limits of the hardware (severe backlash, structural flex, elastic cable torque, and a top-heavy layout) meant that the full stable two-axis stabilization I hoped for was unattainable from my prototype. No amount of software tuning can magically fix mechanical compliance :(
 
 I decided to close the project here as a somewhat successful proof-of-concept. My cardboard structure and cheap servos were the bottleneck, but the control and signal-processing goals I set out to learn were met. From a software and systems integration standpoint, I successfully:
 
 * Interfaced an ESP32 with an external I2C module (PCA9685).
 * Read, decoded, and applied trigonometry to raw accelerometer registers (MPU6050) to obtain spatial orientation.
 * Implemented a digital low-pass filter to clean up noisy sensor data.
-* Wrote a custom PID class handling discrete time steps (dt) and output saturation.
+* Wrote a custom PID class handling discrete time steps (`dt`) and output saturation.
 * Diagnosed and resolved bare-metal and power distribution issues.

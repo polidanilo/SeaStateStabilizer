@@ -1,6 +1,8 @@
 # 2-Axis Roll-Pitch Gimbal
 I wanted to design and build a 2-DoF platform stabilization system: a first project to finally put to use the bunch of servos, PCBs, wiring and the ESP32 I had bought months ago when I wanted to build myself a little robot. Nowadays, I focus more on marine robotics (and more broadly cyber-physical systems) as ROVs / AUVs / USVs are a great interest of mine! So I chose this idea as a simple way to break free of analysis paralysis and take a first step into marine technology, control theory, electronics and the fundamentals of robotics.
 
+For day-by-day hardware troubleshooting, notes and development details, see [DEVLOG.md](DEVLOG.md).
+
 ## Overview
 Inspired by the engineering challenges of payload stabilization on Uncrewed Surface Vessels (USVs), where roll and pitch degrade the accuracy of hydroacoustic sensors like echosounders, this project explores the same mechatronic principles of fin stabilizers: Motion Reference Unit-like sensing and active compensation on a small-scale, low-cost prototype.
 
@@ -66,7 +68,3 @@ The current design relies on a reactive PID, which was enough for my first proje
 * **Complementary or Kalman filter** on the IMU to fuse accelerometer and gyroscope data for more stable angle estimates.
 * **Model Predictive Control (MPC)** or other intelligent solutions, to anticipate tilt rather than only react to it — relevant for USV applications where sea-state prediction is feasible.
 * **Rigid chassis** (laser-cut acrylic or 3D-printed frame) and metal-gear or brushless actuators to eliminate backlash and structural flex.
-
----
-
-For day-by-day hardware troubleshooting, notes and development details, see [DEVLOG.md](DEVLOG.md).

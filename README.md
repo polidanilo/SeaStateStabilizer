@@ -63,4 +63,4 @@ The current design relies on a reactive PID, which was enough for my first proje
 
 ---
 
-For day-by-day hardware troubleshooting, soldering notes and development details, see [DEVLOG.md](DEVLOG.md).
+For day-by-day hardware troubleshooting, notes and development details, see [DEVLOG.md](DEVLOG.md).

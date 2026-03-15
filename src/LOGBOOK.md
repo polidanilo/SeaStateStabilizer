@@ -10,7 +10,7 @@ With my Software Engineering and Database Administration courses out of the way 
 * ESP32 `GPIO 21` → PCA9685 `SDA` (I2C data)
 * ESP32 `GPIO 22` → PCA9685 `SCL` (I2C clock)
 * PCA9685 channels 0 and 1 → servos (PWM, V+, GND)
-* Motor power was first attempted via a USB adapter with screw terminals → PCA9685 green terminal block (note: later superseded as seen in section "Power distribution")
+* Motor power was first attempted via a USB adapter with screw terminals → PCA9685 green terminal block *(note: later superseded as seen in section "Power distribution")*
 
 ## ...First Obstacles
 As I had my first attempt at stripping wires to connect screw terminals, power delivery bit me back immediately and the servos refused to behave. Or move. At all, for like a week. I had originally bought a QUI idk USB-to-terminals adapter to use with an existing USB extension cable I had, but the latter turned out to be faulty and nearly damaged components. That meant a bunch of tests to see who the culprit was, what had survived, and effectively a full restart. For a while losing my extension cable also meant I had to kneel by the wall for my power supply, until I decided for a solution.

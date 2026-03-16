@@ -3,20 +3,17 @@ I wanted to design and build a 2-DoF platform stabilization system: a first proj
 
 For day-by-day hardware troubleshooting, notes and development details, see [LOGBOOK.md](LOGBOOK.md).
 
-![Schematic of an active fin stabilizer system](https://upload.wikimedia.org/wikipedia/commons/a/a4/Flossenstabilisatoren_schematisch_en.png)
-*Fig. 1: Schematic illustrating the kinematic principle of an active fin stabilizer system. While industrial vessels use macro-scale fins to stabilize the entire ship, my project explores the same underlying mathematical and mechatronic challenges, such as Sensor Fusion and Discrete PID Control, applied to payload stabilization on a micro-scale. (Image: [Lämpel via Wikimedia Commons](https://commons.wikimedia.org/w/index.php?curid=129736124), CC BY-SA 4.0)*
-
 ## Overview
 Inspired by the engineering challenges of payload stabilization on Uncrewed Surface Vessels (USVs), where roll and pitch degrade the accuracy of hydroacoustic sensors like echosounders, this project explores the same mechatronic principles of fin stabilizers: Motion Reference Unit-like sensing and active compensation on a small-scale, low-cost prototype.
 
 <table border="0" style="width: 100%; border-collapse: collapse;">
   <tr>
     <td align="center" style="width: 50%; border: 0; padding: 10px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flossenstabilisatoren_schematisch_en.png" alt="Schematic of an active fin stabilizer system" style="width: 100%; max-width: 400px; max-height: 500px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flossenstabilisatoren_schematisch_en.png" alt="Schematic of an active fin stabilizer system" style="width: 100%; max-width: 400px; max-height: 350px;">
       <br>
     </td>
     <td align="center" style="width: 50%; border: 0; padding: 10px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Polarstern_stabilizer_hg.jpg/1280px-Polarstern_stabilizer_hg.jpg?_=20230319063911" alt="Extended fin stabilizer on research vessel POLARSTERN" style="width: 100%; max-width: 400px; height: auto;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Polarstern_stabilizer_hg.jpg/1280px-Polarstern_stabilizer_hg.jpg?_=20230319063911" alt="Extended fin stabilizer on research vessel POLARSTERN" style="width: 100%; max-width: 400px; max-height: 350px;">
       <br>
     </td>
   </tr>

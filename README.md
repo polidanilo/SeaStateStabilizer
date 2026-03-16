@@ -10,6 +10,7 @@ For day-by-day hardware troubleshooting, notes and development details, see [LOG
 </p>
 
 ## Overview
+Inspired by the engineering challenges of payload stabilization on Uncrewed Surface Vessels (USVs), where roll and pitch degrade the accuracy of hydroacoustic sensors like echosounders, this project explores the same mechatronic principles of fin stabilizers: Motion Reference Unit-like sensing and active compensation on a small-scale, low-cost prototype.
 
 <table border="0" style="width: 100%; border-collapse: collapse;">
   <tr>
@@ -29,8 +30,6 @@ For day-by-day hardware troubleshooting, notes and development details, see [LOG
     <br>
 (Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
 </p>
-
-Inspired by the engineering challenges of payload stabilization on Uncrewed Surface Vessels (USVs), where roll and pitch degrade the accuracy of hydroacoustic sensors like echosounders, this project explores the same mechatronic principles of fin stabilizers: Motion Reference Unit-like sensing and active compensation on a small-scale, low-cost prototype.
 
 
 <table border="0" style="width: 80%; max-width: 600px; margin: 0 auto; border-collapse: collapse;">

@@ -4,27 +4,27 @@ I wanted to design and build a 2-DoF platform stabilization system: a first proj
 For day-by-day hardware troubleshooting, notes and development details, see [LOGBOOK.md](LOGBOOK.md).
 
 ## Overview
-Inspired by the engineering challenges of payload stabilization on Uncrewed Surface Vessels (USVs), where roll and pitch degrade the accuracy of hydroacoustic sensors like echosounders, this project explores the same mechatronic principles of fin stabilizers: Motion Reference Unit-like sensing and active compensation on a small-scale, low-cost prototype.
 
 <table border="0" style="width: 100%; border-collapse: collapse;">
   <tr>
     <td align="center" style="width: 50%; border: 0; padding: 10px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flossenstabilisatoren_schematisch_en.png" alt="Schematic of an active fin stabilizer system" style="width: 100%; max-width: 400px; max-height: 350px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flossenstabilisatoren_schematisch_en.png" alt="Schematic of an active fin stabilizer system" style="width: 100%; max-width: 400px; max-height: 250px;">
       <br>
     </td>
     <td align="center" style="width: 50%; border: 0; padding: 10px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Polarstern_stabilizer_hg.jpg/1280px-Polarstern_stabilizer_hg.jpg?_=20230319063911" alt="Extended fin stabilizer on research vessel POLARSTERN" style="width: 100%; max-width: 400px; max-height: 350px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Polarstern_stabilizer_hg.jpg/1280px-Polarstern_stabilizer_hg.jpg?_=20230319063911" alt="Extended fin stabilizer on research vessel POLARSTERN" style="width: 100%; max-width: 400px; max-height: 250px;">
       <br>
     </td>
   </tr>
 </table>
 
-
 <p align="center">
   <em>Schematic illustrating the kinematic principle of an active fin stabilizer system. While macro-scale fins (right) move the entire vessel, my project explores analog mechatronic challenges such as Sensor Fusion and Discrete PID Control applied to payload stabilization on a micro-scale.
+    <br>
 (Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
 </p>
 
+Inspired by the engineering challenges of payload stabilization on Uncrewed Surface Vessels (USVs), where roll and pitch degrade the accuracy of hydroacoustic sensors like echosounders, this project explores the same mechatronic principles of fin stabilizers: Motion Reference Unit-like sensing and active compensation on a small-scale, low-cost prototype.
 
 Its primary goal is to keep a top-mounted sensor payload (MPU6050 IMU) perfectly horizontal by actively compensating for external pitch and roll disturbances, simulating the motion of a vessel in rough seas. Building the system from scratch was a practical dive into:
 * **Mechanics and CAD:** Checking operational limits and kinematics behaviour in Onshape (joint ranges, no self-collision) and designing a mechanical layout that isolates the electronics from the moving payload.

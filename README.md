@@ -3,6 +3,12 @@ I wanted to design and build a 2-DoF platform stabilization system: a first proj
 
 For day-by-day hardware troubleshooting, notes and development details, see [LOGBOOK.md](LOGBOOK.md).
 
+<p align="center">
+  <img src="assets/cad/active_stabilization.gif" alt="Active Stabilization Inverse Kinematics" width="80%">
+  <br>
+  <em>Active Stabilization Simulation (Inverse Kinematics): The base (simulating a vessel) pitches and rolls, while the control loop dynamically adjusts the mechanical arms to keep the sensor payload perfectly horizontal.</em>
+</p>
+
 ## Overview
 
 <table border="0" style="width: 100%; border-collapse: collapse;">
@@ -26,12 +32,34 @@ For day-by-day hardware troubleshooting, notes and development details, see [LOG
 
 Inspired by the engineering challenges of payload stabilization on Uncrewed Surface Vessels (USVs), where roll and pitch degrade the accuracy of hydroacoustic sensors like echosounders, this project explores the same mechatronic principles of fin stabilizers: Motion Reference Unit-like sensing and active compensation on a small-scale, low-cost prototype.
 
+
+<table border="0" style="width: 80%; max-width: 600px; margin: 0 auto; border-collapse: collapse;">
+  <tr>
+    <td align="center" style="width: 50%; border: 0; padding: 5px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flossenstabilisatoren_schematisch_en.png" alt="Schematic of an active fin stabilizer system" style="width: 100%; height: auto;">
+    </td>
+    <td align="center" style="width: 50%; border: 0; padding: 5px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Polarstern_stabilizer_hg.jpg/1280px-Polarstern_stabilizer_hg.jpg?_=20230319063911" alt="Extended fin stabilizer on research vessel POLARSTERN" style="width: 100%; height: auto;">
+    </td>
+  </tr>
+</table>
+
+<p align="center" style="font-size: 0.9em; line-height: 1.2;">
+  <em>Schematic illustrating the kinematic principle of an active fin stabilizer system. While macro-scale fins (right) move the entire vessel, my project explores analog mechatronic challenges such as Sensor Fusion and Discrete PID Control applied to payload stabilization on a micro-scale.
+    <br>
+(Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
+</p>
+
 Its primary goal is to keep a top-mounted sensor payload (MPU6050 IMU) perfectly horizontal by actively compensating for external pitch and roll disturbances, simulating the motion of a vessel in rough seas. Building the system from scratch was a practical dive into:
 * **Mechanics and CAD:** Checking operational limits and kinematics behaviour in Onshape (joint ranges, no self-collision) and designing a mechanical layout that isolates the electronics from the moving payload.
 * **Hardware and power distribution:** Learning the basics of IoT, electronics, and soldering to build a stable power architecture; isolating the 3.3V logic (ESP32) from the 5V actuator supply (PCA9685 + servos) to prevent motor current spikes from browning out the microcontroller.
 * **Control and signal processing:** Implementing a custom Proportional-Integral-Derivative (PID) controller and a software low-pass filter to turn raw MPU6050 accelerometer data into stable roll/pitch estimates and servo commands.
 
-PLACEHOLDER
+<p align="center">
+  <img src="assets/cad/forward_kinematics.gif" alt="Forward Kinematics Range of Motion Test" width="60%">
+  <br>
+  <em>Forward Kinematics: Validating the operational limits (±45°) to ensure no mechanical binding or self-collision in the structural design.</em>
+</p>
 
 ## Features
 The repository is organized around focused single-purpose **`.ino`** sketches that served me in this project, each targeting one layer of the system:
@@ -63,7 +91,7 @@ Scans the I2C bus and prints detected addresses; used to confirm PCA9685 (`0x40`
 ### Hardware integration notes 
 * Isolated servo and logic rails: SG90 servos draw 0.6–0.7 A each (~1.5 A peak combined), which would brown out the ESP32 if shared. The PCA9685 green terminal block carries motor power independently from the 3.3 V logic supply.
 * My PCA9685 required an explicit I2C initialization order in `Wire.begin(21, 22)` before `pwm.begin()` and explicit oscillator calibration in `setOscillatorFrequency(27000000)` — undocumented gotchas that cause silent servo failures on most Chinese clones.
-* MPU6050 breakout arrived to me with unsoldered header pins; after my first try hand-soldering them, I encountered intermittent I2C failures caused by cold joints on the GND and SCL pins, diagnosed via direct pad bypass and resolved by re-soldering them.
+* the MPU6050 arrived to me with unsoldered header pins; after my first try hand-soldering them, I encountered intermittent I2C failures caused by cold joints on the GND and SCL pins, which I quickly diagnosed via direct pad bypass and resolved by re-soldering them more carefully.
 
 ### Bill of materials
 | Component | Part |
@@ -75,6 +103,12 @@ Scans the I2C bus and prints detected addresses; used to confirm PCA9685 (`0x40`
 | Power supply | 5V/3A DC (isolated from logic) |
 | Chassis | Custom cardboard structure |
 | Other | Breadboard, jumper wires |
+
+<p align="center">
+  <img src="assets/photos/prototype_lab.jpg" alt="Hardware Prototype" width="80%">
+  <br>
+  <em>The assembled hardware testbench, highlighting the isolated power distribution and I2C wiring.</em>
+</p>
 
 ## Limitations
 The control loop and signal chain behave as intended; I closed the project as a proof-of-concept due to physical constraints inherent to the hardware. Commercial drone-grade gimbals use direct-drive brushless motors and rigid carbon frames — this prototype uses plastic-gear servos and cardboard, which introduce backlash, flex and parasitic torque that a software PID alone cannot fully compensate.

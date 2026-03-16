@@ -14,7 +14,7 @@ Inspired by the engineering challenges of payload stabilization on Uncrewed Surf
 
 <table width="100%" style="max-width: 800px; margin: 0 auto; border-collapse: collapse; border: 1px solid #d0d7de;">
   <tr>
-    <td width="30%" align="center" valign="middle" style="padding: 10px; padding-top:12px border: none;">
+    <td width="30%" align="center" valign="middle" style="padding: 10px; border: none;">
       <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flossenstabilisatoren_schematisch_en.png" alt="Schematic of an active fin stabilizer system" width="100%" style="max-width: 200px; height: auto;">
     </td>
     <td width="70%" align="center" valign="middle" style="padding: 10px; border: none;">

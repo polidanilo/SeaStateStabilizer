@@ -1,5 +1,5 @@
 # 2-Axis Roll-Pitch Gimbal
-I wanted to design and build a 2-DoF platform stabilization system: a first project to finally put to use the bunch of servos, PCBs, wiring and the ESP32 I had bought months ago when I wanted to build myself a little robot. Nowadays, I focus more on marine robotics (and more broadly cyber-physical systems) as ROVs / AUVs / USVs are a great interest of mine! So I chose this idea as a simple way to break free of analysis paralysis and take a first step into marine technology, control theory, electronics and the fundamentals of robotics.
+I wanted to design and build a 2-DoF platform stabilization system: a first project to finally put to use the bunch of servos, PCBs, wiring and the ESP32 I had bought months ago when I wanted to build myself a little robot. Nowadays, I focus more on marine robotics (and more broadly on cyber-physical systems) as ROVs / AUVs / USVs are a great interest of mine! So I chose this idea as a simple way to break free of analysis paralysis and take a first step into marine technology, control theory, electronics and the fundamentals of robotics.
 
 For day-by-day hardware troubleshooting, notes and development details, see [DEVLOG.md](DEVLOG.md).
 

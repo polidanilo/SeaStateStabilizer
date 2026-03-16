@@ -10,8 +10,9 @@ For day-by-day hardware troubleshooting, notes and development details, see [LOG
 </p>
 
 ## Overview
-Inspired by the engineering challenges of payload stabilization on Uncrewed Surface Vessels (USVs), where roll and pitch degrade the accuracy of hydroacoustic sensors like echosounders, this project explores the same mechatronic principles of fin stabilizers: Motion Reference Unit-like sensing and active compensation on a small-scale, low-cost prototype. Its primary goal is to keep a top-mounted sensor payload (MPU6050 IMU) perfectly horizontal by actively compensating for external pitch and roll disturbances, simulating the motion of a vessel in rough seas. 
+Inspired by the engineering challenges of payload stabilization on Uncrewed Surface Vessels (USVs), where roll and pitch degrade the accuracy of hydroacoustic sensors like echosounders, this project explores the same mechatronic principles of fin stabilizers: Motion Reference Unit-like sensing and active compensation on a small-scale, low-cost prototype. Its primary goal is to keep a top-mounted sensor payload (MPU6050 IMU) perfectly horizontal by actively counteracting external disturbances, simulating the motion of a vessel in rough seas. 
 
+<br>
 <table width="100%" style="max-width: 800px; margin: 0 auto; border-collapse: collapse; border: 1px solid #d0d7de;">
   <tr>
     <td width="30%" align="center" valign="middle" style="padding: 10px; border: none;">

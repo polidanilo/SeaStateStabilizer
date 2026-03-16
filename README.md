@@ -23,47 +23,10 @@ Inspired by the engineering challenges of payload stabilization on Uncrewed Surf
   </tr>
   <tr>
     <td colspan="2" align="center" style="padding: 12px; border-top: 1px solid #d0d7de; font-size: 0.85em; line-height: 1.4; color: #555;">
-      <em><strong>Fig. 1:</strong> Schematic illustrating the kinematic principle of an active fin stabilizer system. While macro-scale fins (right) move the entire vessel, my project explores analog mechatronic challenges such as Sensor Fusion and Discrete PID Control applied to payload stabilization on a micro-scale.<br>
-      (Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
+      <em>Schematic illustrating the kinematic principle of an active fin stabilizer system (left). While macro-scale fins (right) move the entire vessel, my project explores analog mechatronic challenges such as Sensor Fusion and Discrete PID Control applied to payload stabilization on a micro-scale (Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
     </td>
   </tr>
 </table>
--
-<table border="0" style="width: 100%; border-collapse: collapse;">
-  <tr>
-    <td align="center" style="width: 50%; border: 0; padding: 10px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flossenstabilisatoren_schematisch_en.png" alt="Schematic of an active fin stabilizer system" style="width: 100%; max-width: 400px; max-height: 250px;">
-      <br>
-    </td>
-    <td align="center" style="width: 50%; border: 0; padding: 10px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Polarstern_stabilizer_hg.jpg/1280px-Polarstern_stabilizer_hg.jpg?_=20230319063911" alt="Extended fin stabilizer on research vessel POLARSTERN" style="width: 100%; max-width: 400px; max-height: 250px;">
-      <br>
-    </td>
-  </tr>
-</table>
-
-<p align="center">
-  <em>Schematic illustrating the kinematic principle of an active fin stabilizer system. While macro-scale fins (right) move the entire vessel, my project explores analog mechatronic challenges such as Sensor Fusion and Discrete PID Control applied to payload stabilization on a micro-scale.
-    <br>
-(Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
-</p>
--
-<table border="0" style="width: 80%; max-width: 600px; margin: 0 auto; border-collapse: collapse;">
-  <tr>
-    <td align="center" style="width: 50%; border: 0; padding: 5px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flossenstabilisatoren_schematisch_en.png" alt="Schematic of an active fin stabilizer system" style="width: 100%; height: auto;">
-    </td>
-    <td align="center" style="width: 50%; border: 0; padding: 5px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Polarstern_stabilizer_hg.jpg/1280px-Polarstern_stabilizer_hg.jpg?_=20230319063911" alt="Extended fin stabilizer on research vessel POLARSTERN" style="width: 100%; height: auto;">
-    </td>
-  </tr>
-</table>
-
-<p align="center" style="font-size: 0.9em; line-height: 1.2;">
-  <em>Schematic illustrating the kinematic principle of an active fin stabilizer system. While macro-scale fins (right) move the entire vessel, my project explores analog mechatronic challenges such as Sensor Fusion and Discrete PID Control applied to payload stabilization on a micro-scale.
-    <br>
-(Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
-</p>
 
 Its primary goal is to keep a top-mounted sensor payload (MPU6050 IMU) perfectly horizontal by actively compensating for external pitch and roll disturbances, simulating the motion of a vessel in rough seas. Building the system from scratch was a practical dive into:
 * **Mechanics and CAD:** Checking operational limits and kinematics behaviour in Onshape (joint ranges, no self-collision) and designing a mechanical layout that isolates the electronics from the moving payload.

@@ -12,28 +12,9 @@ For day-by-day hardware troubleshooting, notes and development details, see [LOG
 ## Overview
 Inspired by the engineering challenges of payload stabilization on Uncrewed Surface Vessels (USVs), where roll and pitch degrade the accuracy of hydroacoustic sensors like echosounders, this project explores the same mechatronic principles of fin stabilizers: Motion Reference Unit-like sensing and active compensation on a small-scale, low-cost prototype.
 
-<table align="center" style="border-collapse: collapse; border: 1px solid #d0d7de;">
-  <tr>
-    <td align="center" valign="middle" style="padding: 15px; border: none;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flossenstabilisatoren_schematisch_en.png" alt="Schematic of an active fin stabilizer system" width="130">
-    </td>
-    <td align="center" valign="middle" style="padding: 15px; border: none;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Polarstern_stabilizer_hg.jpg/1280px-Polarstern_stabilizer_hg.jpg" alt="Extended fin stabilizer on research vessel POLARSTERN" width="500">
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center" style="padding: 15px; border-top: 1px solid #d0d7de; font-size: 0.85em; line-height: 1.4; color: #555;">
-      <em><strong>Fig. 1:</strong> Schematic illustrating the kinematic principle of an active fin stabilizer system. While macro-scale fins (right) move the entire vessel, my project explores analog mechatronic challenges such as Sensor Fusion and Discrete PID Control applied to payload stabilization on a micro-scale.<br>
-      (Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
-    </td>
-  </tr>
-</table>
-
-.
-
 <table width="100%" style="max-width: 800px; margin: 0 auto; border-collapse: collapse; border: 1px solid #d0d7de;">
   <tr>
-    <td width="30%" align="center" valign="middle" style="padding: 10px; border: none;">
+    <td width="30%" align="center" valign="middle" style="padding: 10px; padding-top:12px border: none;">
       <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flossenstabilisatoren_schematisch_en.png" alt="Schematic of an active fin stabilizer system" width="100%" style="max-width: 200px; height: auto;">
     </td>
     <td width="70%" align="center" valign="middle" style="padding: 10px; border: none;">
@@ -42,29 +23,11 @@ Inspired by the engineering challenges of payload stabilization on Uncrewed Surf
   </tr>
   <tr>
     <td colspan="2" align="center" style="padding: 12px; border-top: 1px solid #d0d7de; font-size: 0.85em; line-height: 1.4; color: #555;">
-      <em><strong>Fig. 1:</strong> Schematic illustrating the kinematic principle of an active fin stabilizer system. While macro-scale fins (right) move the entire vessel, my project explores analog mechatronic challenges such as Sensor Fusion and Discrete PID Control applied to payload stabilization on a micro-scale.<br>
-      (Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
+<em>Schematic illustrating the kinematic principle of an active fin stabilizer system (left). While macro-scale fins (right) move the entire vessel, my project explores analog mechatronic challenges such as Sensor Fusion and Discrete PID Control applied to payload stabilization on a micro-scale (Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
     </td>
   </tr>
 </table>
 
--
-
-<table style="max-width: 600px; margin: 0 auto; border-collapse: collapse; border: 1px solid #d0d7de;">
-  <tr>
-    <td align="center" style="width: 50%; padding: 10px; border: none;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flossenstabilisatoren_schematisch_en.png" alt="Schematic of an active fin stabilizer system" style="max-height: 180px; width: auto;">
-    </td>
-    <td align="center" style="width: 50%; padding: 10px; border: none;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Polarstern_stabilizer_hg.jpg/1280px-Polarstern_stabilizer_hg.jpg?_=20230319063911" alt="Extended fin stabilizer on research vessel POLARSTERN" style="max-height: 180px; width: auto;">
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center" style="padding: 12px; border-top: 1px solid #d0d7de; font-size: 0.85em; line-height: 1.4; color: #555;">
-      <em>Schematic illustrating the kinematic principle of an active fin stabilizer system (left). While macro-scale fins (right) move the entire vessel, my project explores analog mechatronic challenges such as Sensor Fusion and Discrete PID Control applied to payload stabilization on a micro-scale (Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
-    </td>
-  </tr>
-</table>
 
 Its primary goal is to keep a top-mounted sensor payload (MPU6050 IMU) perfectly horizontal by actively compensating for external pitch and roll disturbances, simulating the motion of a vessel in rough seas. Building the system from scratch was a practical dive into:
 * **Mechanics and CAD:** Checking operational limits and kinematics behaviour in Onshape (joint ranges, no self-collision) and designing a mechanical layout that isolates the electronics from the moving payload.

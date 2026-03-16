@@ -10,7 +10,7 @@ For day-by-day hardware troubleshooting, notes and development details, see [LOG
 </p>
 
 ## Overview
-Inspired by the engineering challenges of payload stabilization on Uncrewed Surface Vessels (USVs), where roll and pitch degrade the accuracy of hydroacoustic sensors like echosounders, this project explores the same mechatronic principles of fin stabilizers: Motion Reference Unit-like sensing and active compensation on a small-scale, low-cost prototype.
+Inspired by the engineering challenges of payload stabilization on Uncrewed Surface Vessels (USVs), where roll and pitch degrade the accuracy of hydroacoustic sensors like echosounders, this project explores the same mechatronic principles of fin stabilizers: Motion Reference Unit-like sensing and active compensation on a small-scale, low-cost prototype. Its primary goal is to keep a top-mounted sensor payload (MPU6050 IMU) perfectly horizontal by actively compensating for external pitch and roll disturbances, simulating the motion of a vessel in rough seas. 
 
 <table width="100%" style="max-width: 800px; margin: 0 auto; border-collapse: collapse; border: 1px solid #d0d7de;">
   <tr>
@@ -27,9 +27,9 @@ Inspired by the engineering challenges of payload stabilization on Uncrewed Surf
     </td>
   </tr>
 </table>
+<br>
 
-
-Its primary goal is to keep a top-mounted sensor payload (MPU6050 IMU) perfectly horizontal by actively compensating for external pitch and roll disturbances, simulating the motion of a vessel in rough seas. Building the system from scratch was a practical dive into:
+Building the system from scratch was a practical dive into:
 * **Mechanics and CAD:** Checking operational limits and kinematics behaviour in Onshape (joint ranges, no self-collision) and designing a mechanical layout that isolates the electronics from the moving payload.
 * **Hardware and power distribution:** Learning the basics of IoT, electronics, and soldering to build a stable power architecture; isolating the 3.3V logic (ESP32) from the 5V actuator supply (PCA9685 + servos) to prevent motor current spikes from browning out the microcontroller.
 * **Control and signal processing:** Implementing a custom Proportional-Integral-Derivative (PID) controller and a software low-pass filter to turn raw MPU6050 accelerometer data into stable roll/pitch estimates and servo commands.

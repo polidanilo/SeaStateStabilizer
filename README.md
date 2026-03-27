@@ -1,5 +1,5 @@
 # 2-Axis Roll-Pitch Gimbal
-I wanted to design and build a 2-DoF platform stabilization system: a first project to finally put to use the bunch of servos, PCBs, wiring and the ESP32 I had bought months ago when I wanted to build myself a little robot. Nowadays, I'm focusing on marine robotics (and more broadly on cyber-physical systems) as ROVs / AUVs / USVs are a great interest of mine! So I chose this idea as a simple way to break free of analysis paralysis and take a first step into marine technology, control theory, electronics and the fundamentals of robotics.
+I wanted to design and build a 2-DoF platform stabilization system: a first project to finally put to use the bunch of servos, PCBs, wiring and the ESP32 I had bought months ago when I wanted to build myself a robot. Nowadays, I'm focusing on marine robotics (and more broadly on cyber-physical systems) as ROVs / AUVs / USVs are a great interest of mine! So I chose this idea as a simple way to break free of analysis paralysis and take a first step into marine technology, control theory, electronics and the fundamentals of robotics.
 
 For day-by-day hardware troubleshooting, notes and development details, see [LOGBOOK.md](LOGBOOK.md).
 
@@ -24,7 +24,7 @@ Inspired by the engineering challenges of payload stabilization on Uncrewed Surf
   </tr>
   <tr>
     <td colspan="2" align="center" style="padding: 12px; border-top: 1px solid #d0d7de; font-size: 0.85em; line-height: 1.4; color: #555;">
-<em>Schematic illustrating the kinematic principle of an active fin stabilizer system (left). While macro-scale fins (right) move the entire vessel, my project explores analog mechatronic challenges such as Sensor Fusion and Discrete PID Control applied to payload stabilization on a micro-scale (Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
+<em>Schematic illustrating the kinematic princip4le of an active fin stabilizer system (left). While macro-scale fins (right) move the entire vessel, my project explores analog mechatronic challenges such as Sensor Fusion and Discrete PID Control applied to payload stabilization on a micro-scale (Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
     </td>
   </tr>
 </table>
@@ -71,7 +71,7 @@ Scans the I2C bus and prints detected addresses; used to confirm PCA9685 (`0x40`
 ### Hardware integration notes 
 * Isolated servo and logic rails: SG90 servos draw 0.6–0.7 A each (~1.5 A peak combined), which would brown out the ESP32 if shared. The PCA9685 green terminal block carries motor power independently from the 3.3 V logic supply.
 * My PCA9685 required an explicit I2C initialization order in `Wire.begin(21, 22)` before `pwm.begin()` and explicit oscillator calibration in `setOscillatorFrequency(27000000)` — undocumented gotchas that cause silent servo failures on most Chinese clones.
-* the MPU6050 arrived to me with unsoldered header pins; after my first try hand-soldering them, I encountered intermittent I2C failures caused by cold joints on the GND and SCL pins, which I quickly diagnosed via direct pad bypass and resolved by re-soldering them more carefully.
+* the MPU6050 came with unsoldered header pins; after my first try hand-soldering them, I encountered intermittent I2C failures caused by cold joints on the GND and SCL pins, which I quickly diagnosed via direct pad bypass and resolved by re-soldering them more carefully.
 
 ### Bill of materials
 | Component | Part |
@@ -102,3 +102,5 @@ The current design relies on a reactive PID, which was enough for my first proje
 * **Complementary or Kalman filter** on the IMU to fuse accelerometer and gyroscope data for more stable angle estimates.
 * **Model Predictive Control (MPC)** or other intelligent solutions, to anticipate tilt rather than only react to it — relevant for USV applications where sea-state prediction is feasible.
 * **Rigid chassis** (laser-cut acrylic or 3D-printed frame) and metal-gear or brushless actuators to eliminate backlash and structural flex.
+
+All in all, making this prototype was a practical stress-test for hardware-in-the-loop control systems and it clarified the mechanical requirements for future implementations.

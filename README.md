@@ -13,12 +13,12 @@ For day-by-day hardware troubleshooting, notes and development details, see [LOG
 Inspired by the engineering challenges of payload stabilization on Uncrewed Surface Vessels (USVs), where roll and pitch degrade the accuracy of hydroacoustic sensors like echosounders, this project explores the same mechatronic principles of fin stabilizers: Motion Reference Unit-like sensing and active compensation on a small-scale, low-cost prototype. Its primary goal is to keep a top-mounted sensor payload (MPU6050 IMU) perfectly horizontal by actively counteracting external disturbances, simulating the motion of a vessel in rough seas. 
 
 <br>
-<table width="100%" style="max-width: 800px; margin-top: 10px; margin: 0 auto; border-collapse: collapse; border: 1px solid #d0d7de;">
+<table width="100%" style="max-width: 800px; margin: 0 auto; border-collapse: collapse; border: 1px solid #d0d7de;">
   <tr>
     <td width="30%" align="center" valign="middle" style="padding: 10px; border: none;">
       <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flossenstabilisatoren_schematisch_en.png" alt="Schematic of an active fin stabilizer system" width="100%" style="max-width: 200px; height: auto;">
     </td>
-    <td width="70%" align="center" valign="middle" style="padding-top: 12px; padding: 10px; border: none;">
+    <td width="70%" align="center" valign="middle" style="padding: 10px; border: none;">
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Polarstern_stabilizer_hg.jpg/1280px-Polarstern_stabilizer_hg.jpg" alt="Extended fin stabilizer on research vessel POLARSTERN" width="100%" style="height: auto;">
     </td>
   </tr>

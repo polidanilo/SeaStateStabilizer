@@ -24,7 +24,9 @@ Inspired by the engineering challenges of payload stabilization on Uncrewed Surf
   </tr>
   <tr>
     <td colspan="2" align="center" style="padding: 12px; border-top: 1px solid #d0d7de; font-size: 0.85em; line-height: 1.4; color: #555;">
-<em>Schematic illustrating the kinematic princip4le of an active fin stabilizer system (left). While macro-scale fins (right) move the entire vessel, my project explores analog mechatronic challenges such as Sensor Fusion and Discrete PID Control applied to payload stabilization on a micro-scale (Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
+<em>Schematic illustrating the kinematic principles of an active fin stabilizer system (left). While macro-scale fins (right) move an entire vessel, my project explores analog mechatronic challenges applied to payload stabilization on a micro-scale.
+<br>
+(Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
     </td>
   </tr>
 </table>
@@ -73,7 +75,7 @@ Scans the I2C bus and prints detected addresses; used to confirm PCA9685 (`0x40`
 * My PCA9685 required an explicit I2C initialization order in `Wire.begin(21, 22)` before `pwm.begin()` and explicit oscillator calibration in `setOscillatorFrequency(27000000)` — undocumented gotchas that cause silent servo failures on most Chinese clones.
 * the MPU6050 came with unsoldered header pins; after my first try hand-soldering them, I encountered intermittent I2C failures caused by cold joints on the GND and SCL pins, which I quickly diagnosed via direct pad bypass and resolved by re-soldering them more carefully.
 
-### Bill of materials
+## Bill of materials
 | Component | Part |
 |-----------|------|
 | Microcontroller | ESP32 (38-pin) |
@@ -97,7 +99,7 @@ The control loop and signal chain behave as intended; I closed the project as a 
 * **Structural flex:** The cardboard chassis damps fast corrections and forced very conservative PID tuning (low Kp, light damping).
 * **Top-heavy layout:** The base servo fights a large moment arm (arm + upper servo + platform + IMU); inertia and backlash made the base axis prone to undesired oscillation.
 
-### Future work
+## Future work
 The current design relies on a reactive PID, which was enough for my first project, but literature on USVs highlights that purely reactive control has inherent latency in highly dynamic sea states. Future work could explore:
 * **Complementary or Kalman filter** on the IMU to fuse accelerometer and gyroscope data for more stable angle estimates.
 * **Model Predictive Control (MPC)** or other intelligent solutions, to anticipate tilt rather than only react to it — relevant for USV applications where sea-state prediction is feasible.

@@ -18,13 +18,14 @@ Inspired by the engineering challenges of payload stabilization on Uncrewed Surf
     <td width="30%" align="center" valign="middle" style="padding: 10px; border: none;">
       <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flossenstabilisatoren_schematisch_en.png" alt="Schematic of an active fin stabilizer system" width="100%" style="max-width: 200px; height: auto;">
     </td>
-    <td width="70%" align="center" valign="middle" style="padding: 10px; border: none;">
+    <td width="70%" align="center" valign="middle" style="padding-top: 12px; padding: 10px; border: none;">
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Polarstern_stabilizer_hg.jpg/1280px-Polarstern_stabilizer_hg.jpg" alt="Extended fin stabilizer on research vessel POLARSTERN" width="100%" style="height: auto;">
     </td>
   </tr>
   <tr>
     <td colspan="2" align="center" style="padding: 12px; border-top: 1px solid #d0d7de; font-size: 0.85em; line-height: 1.4; color: #555;">
 <em>Schematic illustrating the kinematic principles of an active fin stabilizer system (left). While macro-scale fins (right) move an entire vessel, my project explores analog mechatronic challenges applied to payload stabilization on a micro-scale.
+<br>
 <br>
 (Sources: Schematic by <a href="https://commons.wikimedia.org/w/index.php?curid=129736124">Lämpel</a>, CC BY-SA 4.0; Photo by <a href="https://commons.wikimedia.org/wiki/File:Polarstern_stabilizer_hg.jpg">Hannes Grobe/AWI</a>, CC BY 3.0)</em>
     </td>
